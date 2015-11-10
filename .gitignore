@@ -1,1 +1,3 @@
 gh-pages/*
+bower_components
+bower_components/*
