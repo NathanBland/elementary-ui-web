@@ -4,18 +4,85 @@ html(lang='en')
   head
     title Elementary
     meta(charset='UTF-8')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato:100italic')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Lato:100')
-    link(rel='stylesheet', href='https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en')
     link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css')
     link(rel='stylesheet', href='/css/site.min.css')
+  
   body
-    header
-      nav
-        a
-          span.nav__logo Elementary
-        a Sign Up
-        a Sign In
-    main
-    footer
-    script(type='text/javascript',src='https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js')
+  .mdl-layout.mdl-js-layout
+    header.mdl-layout__header.mdl-layout__header--scroll
+      img.mdl-layout-icon
+      .mdl-layout__header-row
+        span.mdl-layout__title Elementary
+        .mdl-layout-spacer
+        nav.mdl-navigation
+          a.mdl-navigation__link(href='#') Sign In
+          a.mdl-navigation__link(href='#') Sign Up
+    .mdl-layout__drawer.mdl-layout--small-screen-only
+      span.mdl-layout__title Elementary
+      nav.mdl-navigation
+        a.mdl-navigation__link(href='#') Sign In
+        a.mdl-navigation__link(href='#') Sign Up
+    main.mdl-layout__content.mdl-color--grey-100 
+      div 
+        h1 Welcome.
+        .landing__login
+          .landing__singleSignOn
+            button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect
+              i.fa.fa-twitter
+              span Twitter
+            button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect 
+              i.fa.fa-google
+              span Google
+          .landing__login__signUp
+            .mdl-card.mdl-shadow--4dp
+              .mdl-card__title
+                h2.mdl-card__title-text
+                  a(href='#') Sign Up
+                  
+              .mdl-card__supporting-text
+                form(method='post')
+                  .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                    input#signUp__username.mdl-textfield__input(type='text')
+                    label.mdl-textfield__label(for='signUp__username') Username
+                  .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                    input#signUp__password.mdl-textfield__input(type='pasword')
+                    label.mdl-textfield__label(for='signUp__password') Password
+                  
+              .mdl-card__actions
+                button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect
+                  | Sign Up
+                
+          .landing__login__signIn
+            .mdl-card.mdl-shadow--4dp
+              .mdl-card__title
+                h2.mdl-card__title-text
+                  a(href='#') Sign In
+                  
+              .mdl-card__supporting-text
+                form(method='post')
+                  .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                    input#signIn__username.mdl-textfield__input(type='text')
+                    label.mdl-textfield__label(for='signIn__username') Username
+                  .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                    input#signIn__password.mdl-textfield__input(type='password')
+                    label.mdl-textfield__label(for='signIn__password') Password
+                    
+              .mdl-card__actions
+                button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect
+                  | Sign In
+        
+    footer.mdl-mini-footer
+      .mdl-mini-footer__left-section
+        .mdl-logo Elementary
+        ul.mdl-mini-footer__link-list
+          li
+            a(href='#') Help (coming soon)
+          li
+            a(href='#') About (coming soon)
+          
+    
+    script(src='https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js')
