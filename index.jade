@@ -39,42 +39,48 @@ html(lang='en')
               button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect 
                 i.fa.fa-google
                 span Google
-            .landing__login__signUp
+            
+            .landing__login__tabs
               .mdl-card.mdl-shadow--4dp
-                .mdl-card__title
-                  h2.mdl-card__title-text
-                    a(href='#') Sign Up
-                form#signUp(method='post')
-                  .mdl-card__supporting-text
-                      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                        input#signUp__username.mdl-textfield__input(type='text',name='username')
-                        label.mdl-textfield__label(for='signUp__username') Username
-                      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                        input#signUp__password.mdl-textfield__input(type='pasword',name='password')
-                        label.mdl-textfield__label(for='signUp__password') Password
+                .error__message
+                  span
+                .mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
+                  .mdl-tabs__tab-bar
+                    a.mdl-tabs__tab.is-active(href='#signUp-panel') Sign Up
+                    a.mdl-tabs__tab(href='#signIn-panel') Sign In
+                  #signUp-panel.mdl-tabs__panel.is-active
+                    .mdl-card__title
+                      h2.mdl-card__title-text
+                        a(href='#') Sign Up
+                    form#signUp(method='post', action='https://elementary-server-nathanbland.c9.io/api/v1/auth/local/register')
+                      .mdl-card__supporting-text
+                          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#signUp__username.mdl-textfield__input(type='text',name='username')
+                            label.mdl-textfield__label(for='signUp__username') Username
+                          .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                            input#signUp__password.mdl-textfield__input(type='password',name='password')
+                            label.mdl-textfield__label(for='signUp__password') Password
+                          
+                      .mdl-card__actions
+                        button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(type='submit')
+                          | Sign Up
+                  #signIn-panel.mdl-tabs__panel
+                    .mdl-card__title
+                      h2.mdl-card__title-text
+                        a(href='#') Sign In
+                    form#signIn(method='post')
+                      .mdl-card__supporting-text
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                          input#signIn__username.mdl-textfield__input(type='text',name='username')
+                          label.mdl-textfield__label(for='signIn__username') Username
+                        .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
+                          input#signIn__password.mdl-textfield__input(type='password',name='password')
+                          label.mdl-textfield__label(for='signIn__password') Password
+                          
+                      .mdl-card__actions
+                        button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent(type='submit')
+                          | Sign In
                       
-                  .mdl-card__actions
-                    button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--colored(type='submit')
-                      | Sign Up
-                  
-            .landing__login__signIn
-              .mdl-card.mdl-shadow--4dp
-                .mdl-card__title
-                  h2.mdl-card__title-text
-                    a(href='#') Sign In
-                    
-                .mdl-card__supporting-text
-                  form#signIn(method='post')
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                      input#signIn__username.mdl-textfield__input(type='text',name='username')
-                      label.mdl-textfield__label(for='signIn__username') Username
-                    .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                      input#signIn__password.mdl-textfield__input(type='password',name='password')
-                      label.mdl-textfield__label(for='signIn__password') Password
-                      
-                .mdl-card__actions
-                  button.mdl-button.mdl-js-button.mdl-button--raised.mdl-js-ripple-effect.mdl-button--accent
-                    | Sign In
         footer.mdl-mini-footer.mdl-layout--small-screen-only
           .mdl-mini-footer__left-section
             .mdl-logo Elementary
@@ -96,4 +102,5 @@ html(lang='en')
     script(src='https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js')
     script(src='js/promise.min.js')
     script(src='js/fetch.js')
+    script(src='js/runtime.js')
     script(src='js/util.js')

@@ -1,0 +1,8 @@
+div 
+  h1  Welcome #{user.username}
+  if data.length > 0
+    each note, idx in data
+      .note= note
+  else 
+    p Looks like you don't have any notes =/
+    p Why not add a few?
