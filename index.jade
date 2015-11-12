@@ -44,6 +44,7 @@ html(lang='en')
               .mdl-card.mdl-shadow--4dp
                 .error__message
                   span
+                .landing.mdl-progress.mdl-js-progress.mdl-progress__indeterminate
                 .mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
                   .mdl-tabs__tab-bar
                     a.mdl-tabs__tab.is-active(href='#signUp-panel') Sign Up
@@ -55,10 +56,10 @@ html(lang='en')
                     form#signUp(method='post', action='https://elementary-server-nathanbland.c9.io/api/v1/auth/local/register')
                       .mdl-card__supporting-text
                           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#signUp__username.mdl-textfield__input(type='text',name='username')
+                            input#signUp__username.mdl-textfield__input(type='text',name='username',required='required')
                             label.mdl-textfield__label(for='signUp__username') Username
                           .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                            input#signUp__password.mdl-textfield__input(type='password',name='password')
+                            input#signUp__password.mdl-textfield__input(type='password',name='password',required='required')
                             label.mdl-textfield__label(for='signUp__password') Password
                           
                       .mdl-card__actions
@@ -71,10 +72,10 @@ html(lang='en')
                     form#signIn(method='post')
                       .mdl-card__supporting-text
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                          input#signIn__username.mdl-textfield__input(type='text',name='username')
+                          input#signIn__username.mdl-textfield__input(type='text',name='username',required='required')
                           label.mdl-textfield__label(for='signIn__username') Username
                         .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label
-                          input#signIn__password.mdl-textfield__input(type='password',name='password')
+                          input#signIn__password.mdl-textfield__input(type='password',name='password',required='required')
                           label.mdl-textfield__label(for='signIn__password') Password
                           
                       .mdl-card__actions

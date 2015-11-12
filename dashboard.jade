@@ -1,8 +1,12 @@
 div 
   h1  Welcome #{user.username}
+    button.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
+      i.material-icons add
   if data.length > 0
     each note, idx in data
       .note= note
   else 
     p Looks like you don't have any notes =/
-    p Why not add a few?
+    p Why not 
+      a add 
+      | a few?
