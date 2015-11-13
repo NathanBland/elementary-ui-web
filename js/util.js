@@ -45,12 +45,29 @@ function fetchTemplate (name) {
       return body
     })
 }
+function initDashboardMenu () {
+  var menus = document.querySelectorAll('nav.mdl-navigation')
+  for (var i = 0; i < menus.length; i++) {
+    var link = document.createElement('a')
+    link.className = 'mdl-navigation__link'
+    link.setAttribute('href', '/')
+    link.textContent = 'Sign Out'
+    link.addEventListener('click', function (e) {
+      token = ''
+    })
+    menus[i].innerHTML = ''
+    console.log('link to add:', link)
+    menus[i].appendChild(link)
+
+  }
+}
 
 function initDashboard () {
   var main = document.querySelector('main.mdl-layout__content')
   fetchTemplate('dashboard')
     .then(function (dash) {
       window.eval(dash)
+      initDashboardMenu()
       fetchContent('note')
         .then(function (data) {
           console.log('data to tmpl:', data)
@@ -73,6 +90,8 @@ function handleSuccessLogin (data) {
 
 function handleErrorLogin (data) {
   var container = document.querySelector('.error__message')
+  var loader = document.querySelector('.landing.mdl-progress')
+  loader.classList.remove('visible')
   var span = container.querySelector('span')
   if (data.error) {
     span.textContent = data.error.message
@@ -136,18 +155,22 @@ function getFormData (form) {
 function initLanding () {
   var signUp = document.querySelector('#signUp')
   var signIn = document.querySelector('#signIn')
-
+  var loader = document.querySelector('.landing.mdl-progress')
   signUp.addEventListener('submit', function (e) {
     e.preventDefault()
     postForm('/auth/local/register',
       JSON.stringify(getFormData(signUp)),
       handleErrorLogin, handleSuccessLogin)
+    signUp.reset()
+    loader.classList.add('visible')
   })
   signIn.addEventListener('submit', function (e) {
     e.preventDefault()
     postForm('/auth/local/login',
       JSON.stringify(getFormData(signIn)),
       handleErrorLogin, handleSuccessLogin)
+    signIn.reset()
+    loader.classList.add('visible')
   })
 }
 
