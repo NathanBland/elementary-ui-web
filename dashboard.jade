@@ -1,12 +1,21 @@
 div 
   h1  Welcome #{user.username}
-    button.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored
+    button.mdl-button.mdl-js-button.mdl-button--fab.mdl-js-ripple-effect.mdl-button--colored.add
       i.material-icons add
-  if data.length > 0
-    each note, idx in data
-      .note= note
-  else 
-    p Looks like you don't have any notes =/
-    p Why not 
-      a add 
-      | a few?
+  .note__container
+    if data.length > 0
+      each note, idx in data
+        .note__card.mdl-card.mdl-shadow--4dp
+          .mdl-card__title
+            h2.mdl-card__title-text= note.title
+          .mdl-card__supporting-text
+            p= note.content
+          .mdl-card__actions.mdl-card--border
+            button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(id='#{note.alias}')
+              i.material-icons edit
+    else 
+      div.no-notes
+        p Looks like you don't have any notes =/
+        p Why not 
+          a add 
+          | a few?

@@ -67,3 +67,19 @@ body
               .mdl-card__title
                 h2
                   align-self: flex-start
+      .note__container
+        flex-flow: row wrap
+        align-items: stretch
+        justify-content: flex-start
+        .note__card
+          margin: 1em
+          justify-content: flex-start
+          .mdl-card__supporting-text
+            flex: 1 1 auto
+          form
+            .note__card__progress.mdl-progress
+              visibility: collapse
+              opacity: 0
+            .note__card__progress.mdl-progress.visible
+              opacity: 1
+              visibility: visible

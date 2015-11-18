@@ -1,0 +1,8 @@
+.note__card.mdl-card.mdl-shadow--4dp
+  .mdl-card__title
+    h2.mdl-card__title-text= note.title
+  .mdl-card__supporting-text
+    p= note.content
+  .mdl-card__actions.mdl-card--border
+    button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(id='#{note.alias}')
+      i.material-icons edit
