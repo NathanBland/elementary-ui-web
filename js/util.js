@@ -45,6 +45,97 @@ function fetchTemplate (name) {
       return body
     })
 }
+function fetchGetNote (note) {
+  fetchContent('note/' + note)
+    .then(function (data) {
+      return data
+    })
+}
+function fetchPushNote (type, api, data, ecb, cb) {
+  var method = ''
+  switch (type) {
+    case 'new':
+      method = 'post'
+      break
+    case 'update':
+      method = 'put'
+      break
+    default:
+      method = 'post'
+  }
+  fetch(apiBase +
+    '/content/' +
+    api +
+    '?access_token=' +
+    token, {
+      method: method,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: data
+  })
+  .then(function (response) {
+    console.log('response:', response)
+    if (response.status > 399) {
+      ecb(response)
+    }
+    return response.json()
+  })
+  .then(function (json) {
+    console.log('json:', json)
+    if (json.error) {
+      ecb(json)
+    } else {
+      cb(json)
+    }
+  })
+  .catch(function (ex) {
+    console.warn('err:', ex)
+  })
+}
+function initNewNote () {
+  var container = document.querySelector('.note__container')
+  fetchTemplate('newNote')
+    .then(function (newNote) {
+      window.eval(newNote)
+      var noteHtml = document.createElement('div')
+      noteHtml.innerHTML = window.newNote()
+      // var input = noteHtml.querySelector('input')
+      // var content = noteHtml.querySelector('textarea')
+      console.log('noteHtml', noteHtml)
+      container.insertBefore(noteHtml, container.firstChild)
+      componentHandler.upgradeDom()
+      var form = container.querySelector('form')
+      form.addEventListener('submit', function (e) {
+        e.preventDefault()
+        var prog = form.querySelector('.note__card__progress')
+        prog.classList.add('visible')
+        fetchPushNote('new', 'note', JSON.stringify(getFormData(form)),
+          function (error) {
+            console.log('error saving new note:', error)
+            prog.classList.remove('visible')
+          },
+          function (success) {
+            prog.classList.remove('visible')
+            console.log('new note added succesfully:', success)
+            console.log('note is:', success.alias)
+            fetchContent('note/' + success.alias)
+              .then(function (data) {
+                console.log('got data back:', data)
+                fetchTemplate('note')
+                  .then(function (note) {
+                    window.eval(note)
+                    noteHtml.innerHTML = window.note({note: data})
+                  })
+              })
+          }
+        )
+      })
+      var old = document.querySelector('.no-notes')
+      old.remove()
+    })
+}
 function initDashboardMenu () {
   var menus = document.querySelectorAll('nav.mdl-navigation')
   for (var i = 0; i < menus.length; i++) {
@@ -58,7 +149,6 @@ function initDashboardMenu () {
     menus[i].innerHTML = ''
     console.log('link to add:', link)
     menus[i].appendChild(link)
-
   }
 }
 
@@ -73,6 +163,11 @@ function initDashboard () {
           console.log('data to tmpl:', data)
           console.log('user is:', user)
           main.innerHTML = window.dashboard({data: data.data, user: user})
+          var add = document.querySelector('button.add')
+          add.addEventListener('click', function (e) {
+            console.log('click new')
+            initNewNote()
+          })
         })
     })
 }
@@ -146,7 +241,7 @@ function postForm (api, data, ecb, cb) {
 
 function getFormData (form) {
   var data = {}
-  var items = form.querySelectorAll('input')
+  var items = form.querySelectorAll('input, textarea')
   for (var i = 0; i < items.length; i++) {
     data[items[i].name] = items[i].value
   }
