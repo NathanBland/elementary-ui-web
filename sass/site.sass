@@ -1,7 +1,7 @@
 // compileCompressed: ../gh-pages/css/site.min.css
 $primary-1: #3FB57F
 $error-1:  #f44336
-
+$danger : $error-1
 html, body
   font-family: 'Roboto', 'Helvetica', sans-serif
   margin: 0
@@ -76,6 +76,11 @@ body
           justify-content: flex-start
           .mdl-card__supporting-text
             flex: 1 1 auto
+          .mdl-card__actions.mdl-card--border
+            flex-direction: row
+            justify-content: flex-start
+            .delete
+              color: $danger
           form
             .note__card__progress.mdl-progress
               visibility: collapse

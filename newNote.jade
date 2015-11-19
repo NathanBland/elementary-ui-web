@@ -1,4 +1,4 @@
-.note__card.mdl-card.mdl-shadow--4dp
+.note__card.mdl-card.mdl-shadow--4dp.animated.bounceInLeft
   form.newNote
     .error__message
       span
@@ -12,6 +12,9 @@
         textarea#sample5.mdl-textfield__input(type='text', rows='3', name='content')
         label.mdl-textfield__label(for='sample5') Note Text
     .mdl-card__actions
-      button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect
-        i.material-icons save
-        | Save
+      button.edit.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(class='#{note.alias}')
+        i.material-icons edit
+        | Edit
+      button.delete.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(class='#{note.alias}')
+        i.material-icons delete
+        | Delete
