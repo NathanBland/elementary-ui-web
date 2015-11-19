@@ -12,7 +12,7 @@ fetch('https://elementary-server-nathanbland.c9.io/')
 var apiBase = 'https://elementary-server-nathanbland.c9.io/api/v1'
 var token = ''
 var user = {}
-function fetchContent (resource) {
+function fetchContent (resource, method = 'get') {
   return fetch(apiBase +
      '/content/' +
      resource +
@@ -45,8 +45,8 @@ function fetchTemplate (name) {
       return body
     })
 }
-function fetchGetNote (note) {
-  fetchContent('note/' + note)
+function fetchDeleteNote (note) {
+  fetchContent('note/' + note, 'delete')
     .then(function (data) {
       return data
     })
@@ -127,6 +127,14 @@ function initNewNote () {
                   .then(function (note) {
                     window.eval(note)
                     noteHtml.innerHTML = window.note({note: data})
+                    var edit = noteHtml.querySelector('.edit.' + data.alias)
+                    var del = noteHtml.querySelector('.del.' + data.alias)
+                    edit.addEventListener('click', function (e) {
+                      console.log('edit:', data.alias)
+                    })
+                    del.addEventListener('click', function (e) {
+                      console.log('del:', data.alias)
+                    })
                   })
               })
           }
@@ -165,6 +173,9 @@ function initDashboard () {
           console.log('data to tmpl:', data)
           console.log('user is:', user)
           main.innerHTML = window.dashboard({data: data.data, user: user})
+          var notes = main.querySelector('.note__container')
+          notes.classList.add('animated')
+          notes.classList.add('bounceInDown')
           var add = document.querySelector('button.add')
           add.addEventListener('click', function (e) {
             console.log('click new')
@@ -181,7 +192,12 @@ function handleSuccessLogin (data) {
     var tokenArray = token.split('.')
     user.username = JSON.parse(atob(tokenArray[1])).username
     console.log(user.username)
-    initDashboard()
+    var loginScreen = document.querySelector('main.mdl-layout__content > div')
+    loginScreen.classList.add('animated')
+    loginScreen.classList.add('bounceOutUp')
+    loginScreen.addEventListener('animationend', function (e) {
+      initDashboard()
+    })
   }
 }
 
