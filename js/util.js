@@ -144,7 +144,9 @@ function initDashboardMenu () {
     link.setAttribute('href', '/')
     link.textContent = 'Sign Out'
     link.addEventListener('click', function (e) {
+      e.preventDefault()
       token = ''
+      document.location.reload(true);
     })
     menus[i].innerHTML = ''
     console.log('link to add:', link)
