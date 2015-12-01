@@ -4,7 +4,7 @@ try {
 var buf = [];
 var jade_mixins = {};
 var jade_interp;
-;var locals_for_with = (locals || {});(function (note) {
+
 jade_debug.unshift(new jade.DebugItem( 0, "newNote.jade" ));
 jade_debug.unshift(new jade.DebugItem( 1, "newNote.jade" ));
 buf.push("<div class=\"note__card mdl-card mdl-shadow--4dp animated bounceInLeft\">");
@@ -85,37 +85,19 @@ jade_debug.unshift(new jade.DebugItem( 14, "newNote.jade" ));
 buf.push("<div class=\"mdl-card__actions\">");
 jade_debug.unshift(new jade.DebugItem( undefined, jade_debug[0].filename ));
 jade_debug.unshift(new jade.DebugItem( 15, "newNote.jade" ));
-buf.push("<button" + (jade.cls(['edit','mdl-button','mdl-button--colored','mdl-js-button','mdl-js-ripple-effect','' + (note.alias) + ''], [null,null,null,null,null,true])) + ">");
+buf.push("<button class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\">");
 jade_debug.unshift(new jade.DebugItem( undefined, jade_debug[0].filename ));
 jade_debug.unshift(new jade.DebugItem( 16, "newNote.jade" ));
 buf.push("<i class=\"material-icons\">");
 jade_debug.unshift(new jade.DebugItem( undefined, jade_debug[0].filename ));
 jade_debug.unshift(new jade.DebugItem( 16, jade_debug[0].filename ));
-buf.push("edit");
+buf.push("save");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</i>");
 jade_debug.shift();
 jade_debug.unshift(new jade.DebugItem( 17, "newNote.jade" ));
-buf.push("Edit");
-jade_debug.shift();
-jade_debug.shift();
-buf.push("</button>");
-jade_debug.shift();
-jade_debug.unshift(new jade.DebugItem( 18, "newNote.jade" ));
-buf.push("<button" + (jade.cls(['delete','mdl-button','mdl-button--colored','mdl-js-button','mdl-js-ripple-effect','' + (note.alias) + ''], [null,null,null,null,null,true])) + ">");
-jade_debug.unshift(new jade.DebugItem( undefined, jade_debug[0].filename ));
-jade_debug.unshift(new jade.DebugItem( 19, "newNote.jade" ));
-buf.push("<i class=\"material-icons\">");
-jade_debug.unshift(new jade.DebugItem( undefined, jade_debug[0].filename ));
-jade_debug.unshift(new jade.DebugItem( 19, jade_debug[0].filename ));
-buf.push("delete");
-jade_debug.shift();
-jade_debug.shift();
-buf.push("</i>");
-jade_debug.shift();
-jade_debug.unshift(new jade.DebugItem( 20, "newNote.jade" ));
-buf.push("Delete");
+buf.push("Save");
 jade_debug.shift();
 jade_debug.shift();
 buf.push("</button>");
@@ -129,8 +111,8 @@ jade_debug.shift();
 jade_debug.shift();
 buf.push("</div>");
 jade_debug.shift();
-jade_debug.shift();}.call(this,"note" in locals_for_with?locals_for_with.note:typeof note!=="undefined"?note:undefined));;return buf.join("");
+jade_debug.shift();;return buf.join("");
 } catch (err) {
-  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".note__card.mdl-card.mdl-shadow--4dp.animated.bounceInLeft\n  form.newNote\n    .error__message\n      span\n    .note__card__progress.mdl-progress.mdl-js-progress.mdl-progress__indeterminate\n    .mdl-card__title\n      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label\n        input#new-note__title.mdl-textfield__input(type='text',name='title')\n        label.mdl-textfield__label(for='new-note__title') Title\n    .mdl-card__supporting-text\n      .mdl-textfield.mdl-js-textfield\n        textarea#sample5.mdl-textfield__input(type='text', rows='3', name='content')\n        label.mdl-textfield__label(for='sample5') Note Text\n    .mdl-card__actions\n      button.edit.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(class='#{note.alias}')\n        i.material-icons edit\n        | Edit\n      button.delete.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect(class='#{note.alias}')\n        i.material-icons delete\n        | Delete\n");
+  jade.rethrow(err, jade_debug[0].filename, jade_debug[0].lineno, ".note__card.mdl-card.mdl-shadow--4dp.animated.bounceInLeft\n  form.newNote\n    .error__message\n      span\n    .note__card__progress.mdl-progress.mdl-js-progress.mdl-progress__indeterminate\n    .mdl-card__title\n      .mdl-textfield.mdl-js-textfield.mdl-textfield--floating-label\n        input#new-note__title.mdl-textfield__input(type='text',name='title')\n        label.mdl-textfield__label(for='new-note__title') Title\n    .mdl-card__supporting-text\n      .mdl-textfield.mdl-js-textfield\n        textarea#sample5.mdl-textfield__input(type='text', rows='3', name='content')\n        label.mdl-textfield__label(for='sample5') Note Text\n    .mdl-card__actions\n      button.mdl-button.mdl-button--colored.mdl-js-button.mdl-js-ripple-effect\n        i.material-icons save\n        | Save\n");
 }
 }

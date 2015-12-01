@@ -18,7 +18,7 @@ function fetchContent (resource, method = 'get') {
      resource +
      '?access_token=' +
      token, {
-       method: 'get',
+       method: method,
        headers: {
          'Accept': 'application/json',
          'Content-Type': 'application/json'
@@ -43,12 +43,6 @@ function fetchTemplate (name) {
     })
     .then(function (body) {
       return body
-    })
-}
-function fetchDeleteNote (note) {
-  fetchContent('note/' + note, 'delete')
-    .then(function (data) {
-      return data
     })
 }
 function fetchPushNote (type, api, data, ecb, cb) {
@@ -94,12 +88,19 @@ function fetchPushNote (type, api, data, ecb, cb) {
     console.warn('err:', ex)
   })
 }
+function fetchDeleteNote (note) {
+  return fetchContent('note/' + note, 'delete')
+    .then(function (data) {
+      return data
+    })
+}
 function initNewNote () {
   var container = document.querySelector('.note__container')
   fetchTemplate('newNote')
     .then(function (newNote) {
       window.eval(newNote)
       var noteHtml = document.createElement('div')
+      console.log('template loaded')
       noteHtml.innerHTML = window.newNote()
       // var input = noteHtml.querySelector('input')
       // var content = noteHtml.querySelector('textarea')
@@ -124,16 +125,21 @@ function initNewNote () {
               .then(function (data) {
                 console.log('got data back:', data)
                 fetchTemplate('note')
-                  .then(function (note) {
-                    window.eval(note)
+                  .then(function (noteT) {
+                    window.eval(noteT)
                     noteHtml.innerHTML = window.note({note: data})
-                    var edit = noteHtml.querySelector('.edit.' + data.alias)
-                    var del = noteHtml.querySelector('.del.' + data.alias)
+                    var edit = noteHtml.querySelector('.edit')
+                    var del = noteHtml.querySelector('.delete')
                     edit.addEventListener('click', function (e) {
                       console.log('edit:', data.alias)
                     })
                     del.addEventListener('click', function (e) {
                       console.log('del:', data.alias)
+                      fetchDeleteNote(data.alias)
+                        .then(function (e) {
+                          console.log('e:', e)
+                          noteHtml.remove()
+                        })
                     })
                   })
               })
@@ -175,7 +181,7 @@ function initDashboard () {
           main.innerHTML = window.dashboard({data: data.data, user: user})
           var notes = main.querySelector('.note__container')
           notes.classList.add('animated')
-          notes.classList.add('bounceInDown')
+          notes.classList.add('fadeIn')
           var add = document.querySelector('button.add')
           add.addEventListener('click', function (e) {
             console.log('click new')
